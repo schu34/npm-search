@@ -8,7 +8,7 @@ Not published yet, I'll add instructions here once it is
 Just `npm-search` in your terminal, the app will guide you through the rest
 
 
-##TODOs
+## TODOs
 1. ~allow users to search~
 1. Refactor routing to use less ternaries
 1. add details view which allows users to read package READMEs 
