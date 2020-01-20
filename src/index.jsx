@@ -1,47 +1,84 @@
 import React, { useState, useEffect } from "react";
 import { render, Box, Text, useInput, useApp, Color } from "ink";
-import TextInput from "ink-text-input";
 import npmSearch from "libnpmsearch";
 import { getScreenWidth, getScreenHeight } from "./utils";
-import Results from "./Results";
+import _Results from "./Results";
+import _Search from "./Search";
+import _Details from "./Details";
 
-const Search = ({ value, onChange, doSearch }) => {
-	useInput((_, key) => {
-		if (key.return) doSearch();
-	});
+const Loading = () => <Text>Loading...</Text>;
 
-	return (
-		<TextInput
-			placeholder={"search for a package"}
-			value={value}
-			onChange={onChange}
-		/>
-	);
+const withLoading = Component => ({ loading, ...props }) => {
+	return loading ? <Loading /> : <Component {...props} />;
 };
 
-const Details = ({ text }) => {
-	useInput(() => {});
-	return <Text>details: {text}</Text>;
-};
+const Results = withLoading(_Results);
+const Search = withLoading(_Search);
+const Details = withLoading(_Details);
 
 const App = () => {
 	const [search, setSearch] = useState("");
 	const [loading, setLoading] = useState(false);
 	const [results, setResults] = useState(null);
 	const [selection, setSelection] = useState(null);
+	const [activeScreen, setScreen] = useState("search");
+
 	const { exit } = useApp();
 
 	const doSearch = () => {
 		setLoading(true);
 		npmSearch(search)
 			.then(returnedResults => {
-				setResults(returnedResults);
 				setLoading(false);
+				setResults(returnedResults);
+				setScreen("results");
 			})
 			.catch(e => {
+				setLoading(false);
 				setResults([{ name: "error" }]);
 				setLoading(false);
 			});
+	};
+
+	useInput((input, key) => {
+		if (activeScreen !== "search") {
+			switch (input) {
+				case "s":
+					setSearch("");
+					setScreen("search");
+					setResults(null);
+					break;
+				case "r":
+					setScreen("results");
+					break;
+				case "q":
+					exit();
+				default:
+					break;
+			}
+		}
+	});
+
+	const screens = {
+		search: (
+			<Search
+				loading={loading}
+				value={search}
+				onChange={setSearch}
+				doSearch={doSearch}
+			/>
+		),
+		results: (
+			<Results
+				loading={loading}
+				results={results}
+				select={arg => {
+					setSelection(arg);
+					setScreen("details");
+				}}
+			/>
+		),
+		details: <Details loading={loading} packageName={selection} />
 	};
 
 	return (
@@ -50,17 +87,7 @@ const App = () => {
 			height={getScreenHeight()}
 			flexDirection={"column"}
 		>
-			{loading ? (
-				"loading..."
-			) : results ? (
-				selection === null ? (
-					<Results results={results} select={setSelection} />
-				) : (
-					<Details text={results[selection].description} />
-				)
-			) : (
-				<Search value={search} onChange={setSearch} doSearch={doSearch} />
-			)}
+			{screens[activeScreen]}
 		</Box>
 	);
 };
