@@ -2,9 +2,9 @@ import React from "react";
 import { useInput } from "ink";
 import TextInput from "ink-text-input";
 
-const Search = ({ value, onChange, doSearch }) => {
+const Search = ({ value, onChange, getResults }) => {
   useInput((_, key) => {
-    if (key.return) doSearch();
+    if (key.return) getResults();
   });
 
   return (
