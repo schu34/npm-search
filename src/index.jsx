@@ -1,45 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { render, Box, Text, useInput, useApp, Color } from "ink";
-import getPackageReadme from "get-package-readme";
 import { getScreenWidth, getScreenHeight } from "./utils";
-import _Results from "./Results";
-import _Search from "./Search";
-import _Details from "./Details";
-
-const Loading = () => <Text>Loading...</Text>;
-
-const withLoading = Component => ({ loading, ...props }) => {
-  return loading ? <Loading /> : <Component {...props} />;
-};
-
-const getReadme = packageName =>
-  new Promise((resolve, reject) => {
-    getPackageReadme(packageName, (err, res) => {
-      return err ? reject(err) : resolve(res);
-    });
-  });
-
-const Results = withLoading(_Results);
-const Search = withLoading(_Search);
-const Details = withLoading(_Details);
+import Results from "./Results";
+import Search from "./Search";
+import Details from "./Details";
 
 const App = () => {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [selection, setSelection] = useState(null);
   const [activeScreen, setScreen] = useState("search");
-  const [details, setDetails] = useState(null);
 
   const { exit } = useApp();
-
-  const getDetails = () => {
-    setLoading(true);
-    getReadme(results[selection]).then(text => {
-      setDetails(`details for ${selection}, ${results[selection]}\n` + text);
-      setScreen("details");
-      setLoading(false);
-    });
-  };
 
   useInput((input, key) => {
     if (activeScreen !== "search") {
@@ -73,11 +45,11 @@ const App = () => {
         search={search}
         select={arg => {
           setSelection(arg);
-          getDetails();
+          setScreen("details");
         }}
       />
     ),
-    details: <Details details={details} />
+    details: <Details selection={selection} />
   };
 
   return (

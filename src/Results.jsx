@@ -46,7 +46,7 @@ const Results = ({ search, select }) => {
       }
     }
     if (key.return) {
-      select(selection);
+      select(results[selection].name);
     }
   });
 
