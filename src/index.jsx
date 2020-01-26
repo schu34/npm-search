@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { render, Box, Text, useInput, useApp, Color } from "ink";
-import { getScreenWidth, getScreenHeight } from "./utils";
+import useDimensions from "ink-use-stdout-dimensions";
 import Results from "./Results";
 import Search from "./Search";
 import Details from "./Details";
@@ -11,6 +11,7 @@ const App = () => {
   const [selection, setSelection] = useState(null);
   const [activeScreen, setScreen] = useState("search");
 
+  const [width, height] = useDimensions();
   const { exit } = useApp();
 
   useInput((input, key) => {
@@ -54,9 +55,11 @@ const App = () => {
 
   return (
     <Box
-      width={getScreenWidth()}
-      height={getScreenHeight()}
+      width={width}
+      height={height}
       flexDirection={"column"}
+      alignItems={"center"}
+      justifyContent={"center"}
     >
       {screens[activeScreen]}
     </Box>

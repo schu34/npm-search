@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useInput, Text, Box } from "ink";
 import Loading from "./Loading";
+import useDimensions from "ink-use-stdout-dimensions";
 import { getPackageDetails, getScreenHeight, getScreenWidth } from "./utils";
 
 const Details = ({ selection }) => {
@@ -10,6 +11,8 @@ const Details = ({ selection }) => {
   const [left, setLeft] = useState(0);
   const [maxRows, setMaxRows] = useState(0);
   const [maxCols, setMaxCols] = useState(0);
+
+  const [width, height] = useDimensions();
 
   useInput((input, key) => {
     if (loading) return;
