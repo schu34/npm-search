@@ -6,7 +6,8 @@
   "scripts": {
     "build": "babel src --out-dir=build",
     "start": "npm run build && node build/index.js",
-    "lint": "eslint src/*"
+    "lint": "eslint src/*",
+    "lint:fix": "eslint src/* --fix"
   },
   "babel": {
     "presets": [

@@ -1,10 +1,16 @@
-import React, { useState, Fragment, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { Box, useInput, Color, Text } from "ink";
 import npmSearch from "libnpmsearch";
 import { getScreenHeight } from "./utils";
 import Loading from "./Loading";
 
 const clamp = (number, min, max) => Math.min(max, Math.max(number, min));
+
+Results.propTypes = {
+  search: PropTypes.string.isRequired,
+  select: PropTypes.func.isRequired
+};
 
 const Results = ({ search, select }) => {
   const [top, setTop] = useState(0);
@@ -22,7 +28,7 @@ const Results = ({ search, select }) => {
         setResults(returnedResults);
         // setScreen("results");
       })
-      .catch(e => {
+      .catch(() => {
         setLoading(false);
         setResults([{ name: "error" }]);
         setLoading(false);
