@@ -7,10 +7,6 @@ import Loading from "./Loading";
 
 const clamp = (number, min, max) => Math.min(max, Math.max(number, min));
 
-Results.propTypes = {
-  search: PropTypes.string.isRequired,
-  select: PropTypes.func.isRequired
-};
 
 const Results = ({ search, select }) => {
   const [top, setTop] = useState(0);
@@ -75,6 +71,11 @@ const Results = ({ search, select }) => {
       </Box>
     </Box>
   );
+};
+
+Results.propTypes = {
+  search: PropTypes.string.isRequired,
+  select: PropTypes.func.isRequired,
 };
 
 export default Results;

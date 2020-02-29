@@ -2,11 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Box, useInput, Text } from "ink";
 
-Markdown.propTypes = {
-  source: PropTypes.string.isRequired,
-  width: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired
-};
+
 
 const Markdown = ({ source, width, height }) => {
   const [formattedSource, setFormattedSource] = useState([]);
@@ -59,6 +55,12 @@ const Markdown = ({ source, width, height }) => {
       {formattedSource.slice(top, top + height - 1)}
     </Box>
   );
+};
+
+Markdown.propTypes = {
+  source: PropTypes.string.isRequired,
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired
 };
 
 export default Markdown;

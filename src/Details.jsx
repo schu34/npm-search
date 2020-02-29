@@ -34,7 +34,7 @@ const Details = ({ selection }) => {
 };
 
 Details.propTypes = {
-  selection: PropTypes.string.isRequired()
+  selection: PropTypes.string.isRequired
 };
 
 export default Details;
