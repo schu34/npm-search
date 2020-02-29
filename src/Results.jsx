@@ -7,7 +7,6 @@ import Loading from "./Loading";
 
 const clamp = (number, min, max) => Math.min(max, Math.max(number, min));
 
-
 const Results = ({ search, select }) => {
   const [top, setTop] = useState(0);
   const [selection, setSelection] = useState(0);

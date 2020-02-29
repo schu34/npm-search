@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Box, useInput, Text } from "ink";
 
 
-
 const Markdown = ({ source, width, height }) => {
   const [formattedSource, setFormattedSource] = useState([]);
   const [top, setTop] = useState(1);
@@ -38,7 +37,7 @@ const Markdown = ({ source, width, height }) => {
       return result.concat(linesToAppend);
     }, []);
     setFormattedSource(lines);
-  }, [source]);
+  }, [source, width, height]);
 
   useInput((input, key) => {
     if (key.upArrow || input === "k") {
