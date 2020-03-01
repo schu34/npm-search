@@ -9,7 +9,7 @@
   "scripts": {
     "build": "npx webpack --entry ./src/index.jsx --output dist/main.js --mode production",
     "build:dev": "npx webpack --entry ./src/index.jsx --output dist/main.js --mode development",
-    "start": "npm run build:dev && node build/index.js",
+    "start": "npm run build:dev && ./dist/main.js",
     "lint": "eslint src/*",
     "lint:fix": "eslint src/* --fix"
   },

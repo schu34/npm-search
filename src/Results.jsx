@@ -57,7 +57,7 @@ const Results = ({ search, select }) => {
     <Box width={"100%"} height={"100%"} flexDirection="column">
       {results.slice(top, top + maxRows).map((res, i) => {
         return i === selection ? (
-          <Box>
+          <Box key={res.name}>
             <Color blue>❯ </Color>
             <Text bold>{res.name}</Text>
           </Box>

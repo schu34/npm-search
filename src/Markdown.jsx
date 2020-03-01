@@ -5,7 +5,7 @@ import { Box, useInput, Text } from "ink";
 
 const Markdown = ({ source, width, height }) => {
   const [formattedSource, setFormattedSource] = useState([]);
-  const [top, setTop] = useState(1);
+  const [top, setTop] = useState(0);
 
   useEffect(() => {
     const splitSource = source.split("\n");
