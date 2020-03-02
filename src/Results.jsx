@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Box, useInput, Color, Text } from "ink";
+import useDimensions from "ink-use-stdout-dimensions";
 import npmSearch from "libnpmsearch";
-import { getScreenHeight } from "./utils";
 import Loading from "./Loading";
 
 const clamp = (number, min, max) => Math.min(max, Math.max(number, min));
@@ -12,8 +12,9 @@ const Results = ({ search, select }) => {
   const [selection, setSelection] = useState(0);
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
+  const height = useDimensions()[1];
 
-  const maxRows = Math.min(getScreenHeight() - 2, results.length);
+  const maxRows = Math.min(height- 2, results.length);
 
   useEffect(() => {
     setLoading(true);
@@ -21,7 +22,6 @@ const Results = ({ search, select }) => {
       .then(returnedResults => {
         setLoading(false);
         setResults(returnedResults);
-        // setScreen("results");
       })
       .catch(() => {
         setLoading(false);
