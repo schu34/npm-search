@@ -4,7 +4,7 @@ import Results from "./Results";
 import Search from "./Search";
 import Details from "./Details";
 
-const App = () => {
+export const App = () => {
   const [search, setSearch] = useState("");
   const [selection, setSelection] = useState(null);
   const [activeScreen, setScreen] = useState("search");
