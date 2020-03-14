@@ -50,7 +50,7 @@
     "ink": "^2.6.0",
     "ink-text-input": "^3.2.2",
     "ink-use-stdout-dimensions": "^1.0.5",
-    "libnpmsearch": "^2.0.2",
+    "libnpmsearch": "^3.0.0",
     "react": "^16.12.0"
   }
 }
