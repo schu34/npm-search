@@ -11,7 +11,7 @@
     "build:dev": "npx webpack --entry ./src/index.jsx --output dist/main.js --mode development",
     "start": "npm run build:dev && ./dist/main.js",
     "lint": "eslint . --ext .js,.jsx",
-    "lint:fix": "eslint src/* --fix",
+    "lint:fix": "eslint . --ext .js,.jsx --fix",
     "test": "jest --coverage",
     "test:update": "jest --u"
   },
