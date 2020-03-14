@@ -11,6 +11,6 @@ describe("<Loading />", () => {
       selection:"express",
     };
     const { lastFrame } = render(<Details {...props} />);
-    expect(lastFrame).toMatchSnapshot();
+    expect(lastFrame()).toMatch("getting packge details");
   });
 });

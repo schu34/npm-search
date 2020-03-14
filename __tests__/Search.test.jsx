@@ -10,6 +10,6 @@ describe("<Search />", () => {
       getResults: () => {}
     };
     const { lastFrame } = render(<Search {...props} />);
-    expect(lastFrame()).toMatchSnapshot();
+    expect(lastFrame()).toMatch("search for a package");
   });
 });

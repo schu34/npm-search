@@ -9,6 +9,6 @@ describe("<Results />", () => {
       select:()=>{}
     };
     const { lastFrame } = render(<Results {...props} />);
-    expect(lastFrame()).toMatchSnapshot();
+    expect(lastFrame()).toMatch("searching for packages...");
   });
 });

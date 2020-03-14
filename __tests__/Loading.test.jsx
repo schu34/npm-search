@@ -8,6 +8,6 @@ describe("<Loading />", () => {
       message: "test test"
     };
     const { lastFrame } = render(<Loading {...props} />);
-    expect(lastFrame()).toMatchSnapshot();
+    expect(lastFrame()).toMatch("test test");
   });
 });
