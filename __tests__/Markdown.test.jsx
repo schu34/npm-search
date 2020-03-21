@@ -11,7 +11,7 @@ describe("<Markdown />", () => {
       <Markdown source={mdString} width={50} height={100} />
     );
     rerender(<Markdown source={mdString} width={50} height={100} />);
-    expect(lastFrame()).toMatchSnapshot();
+    expect(JSON.stringify(lastFrame())).toMatchSnapshot();
   });
 });
 
