@@ -1,6 +1,6 @@
 import React from "react";
 import fs from "fs";
-import Markdown from "../src/Markdown";
+import Markdown, { stripHashes } from "../src/Markdown";
 import { render } from "ink-testing-library";
 
 const mdString = fs.readFileSync("./readme.md").toString();
@@ -12,5 +12,17 @@ describe("<Markdown />", () => {
     );
     rerender(<Markdown source={mdString} width={50} height={100} />);
     expect(lastFrame()).toMatchSnapshot();
+  });
+});
+
+describe("stripHashes", () => {
+  it("should strip one hash", () => {
+    expect(stripHashes("#hello")).toBe("hello");
+  });
+  it("should strip many hashes", () => {
+    expect(stripHashes("#####hello")).toBe("hello");
+  });
+  it("should preserve spaces in the string", ()=>{
+    expect(stripHashes("###hello hello")).toBe("hello hello");
   });
 });
