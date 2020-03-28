@@ -3,8 +3,7 @@ import fs from "fs";
 import Markdown, { stripHashes } from "../src/Markdown";
 import { render } from "ink-testing-library";
 
-
-// This is required to normalize snapshot testing across 
+// This is required to normalize snapshot testing across
 // different terminals. It's not ideal since we can't test
 // to make sure styling is happening correctly.
 
@@ -19,7 +18,7 @@ describe("<Markdown />", () => {
       <Markdown source={mdString} width={50} height={100} />
     );
     rerender(<Markdown source={mdString} width={50} height={100} />);
-  expect(lastFrame()).toMatchSnapshot();
+    expect(lastFrame()).toMatchSnapshot();
   });
 });
 
