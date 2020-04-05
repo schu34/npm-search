@@ -2,10 +2,15 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Box, useInput, Color, Text } from "ink";
 import useDimensions from "ink-use-stdout-dimensions";
-import npmSearch from "libnpmsearch";
+import npmRegistryFetch from "npm-registry-fetch";
 import Loading from "./Loading";
 
 const clamp = (number, min, max) => Math.min(max, Math.max(number, min));
+
+const npmSearch = async (search) => {
+  const apiResult = await npmRegistryFetch.json(`/-/v1/search?text=${search}`);
+  return apiResult.objects.map((obj) => obj.package);
+};
 
 const Results = ({ search, select }) => {
   const [top, setTop] = useState(0);
@@ -14,18 +19,18 @@ const Results = ({ search, select }) => {
   const [loading, setLoading] = useState(true);
   const height = useDimensions()[1];
 
-  const maxRows = Math.min(height- 2, results.length);
+  const maxRows = Math.min(height - 2, results.length);
 
   useEffect(() => {
     setLoading(true);
     npmSearch(search)
-      .then(returnedResults => {
+      .then((returnedResults) => {
         setLoading(false);
         setResults(returnedResults);
       })
-      .catch(() => {
+      .catch((e) => {
         setLoading(false);
-        setResults([{ name: "error" }]);
+        setResults([{ name: `error: ${e}` }]);
         setLoading(false);
       });
   }, [search]);
@@ -62,7 +67,7 @@ const Results = ({ search, select }) => {
             <Text bold>{res.name}</Text>
           </Box>
         ) : (
-          "  " + res.name
+          `  ${res.name}`
         );
       })}
       <Box>

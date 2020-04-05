@@ -4457,13 +4457,6 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-libnpmsearch@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/libnpmsearch/-/libnpmsearch-3.0.0.tgz#2a574df5ee570fc6b318c0ca510b53a78b007056"
-  integrity sha512-3p2nKM8nlO8XyQ7+Z9H8FD32uTFCNRwXX2vSWyiD7vt0NW3cVBp93HNK5l7sxBf1mRQnc02xowwYt/cTtiOzqg==
-  dependencies:
-    npm-registry-fetch "^8.0.0"
-
 loader-runner@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/loader-runner/-/loader-runner-2.4.0.tgz#ed47066bfe534d7e84c4c7b9998c2a75607d9357"

@@ -51,7 +51,7 @@
     "ink": "^2.6.0",
     "ink-text-input": "^3.2.2",
     "ink-use-stdout-dimensions": "^1.0.5",
-    "libnpmsearch": "^3.0.0",
+    "npm-registry-fetch": "^8.0.0",
     "react": "^16.13.1"
   }
 }

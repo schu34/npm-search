@@ -22,6 +22,7 @@ module.exports = {
     "linebreak-style": ["error", "unix"],
     quotes: ["error", "double"],
     semi: ["error", "always"],
-    "react/self-closing-comp":["error"]
+    "react/self-closing-comp":["error"],
+    "prefer-template":["error"]
   }
 };

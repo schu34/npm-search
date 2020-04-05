@@ -19,7 +19,7 @@ const Details = ({ selection }) => {
         setLoading(false);
       })
       .catch(err => {
-        setDetails("ERROR fetching " + selection + " " + err);
+        setDetails(`ERROR fetching ${  selection  } ${  err}`);
         setLoading(false);
       });
   }, [selection]);

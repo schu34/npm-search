@@ -48,7 +48,7 @@ const Markdown = ({ source, width, height }) => {
       }
       if (currentLine.length)
         linesToAppend.push(
-          <Component key={currentLine + "last" + lineNumber}>
+          <Component key={`${currentLine  }last${  lineNumber}`}>
             {currentLine}
           </Component>
         );
