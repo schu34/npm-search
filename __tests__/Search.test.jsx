@@ -7,7 +7,7 @@ describe("<Search />", () => {
     const props = {
       value: "",
       onChange: () => {},
-      getResults: () => {}
+      getResults: () => {},
     };
     const { lastFrame } = render(<Search {...props} />);
     expect(lastFrame()).toMatch("search for a package");

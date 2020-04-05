@@ -4,10 +4,10 @@ import { Box, useInput, Text } from "ink";
 
 export const Title = ({ ...props }) => <Text {...props} bold />;
 
-export const stripHashes = str =>
+export const stripHashes = (str) =>
   str
     .split("")
-    .filter(c => c !== "#")
+    .filter((c) => c !== "#")
     .join("");
 
 const Markdown = ({ source, width, height }) => {
@@ -22,9 +22,7 @@ const Markdown = ({ source, width, height }) => {
       let words = nextLine.split(" ");
       let Component = Text;
       if (nextLine[0] === "#") {
-        words = stripHashes(nextLine)
-          .trim()
-          .split(" ");
+        words = stripHashes(nextLine).trim().split(" ");
         Component = Title;
       }
       if (!nextLine.length) return result.concat(" ");
@@ -48,7 +46,7 @@ const Markdown = ({ source, width, height }) => {
       }
       if (currentLine.length)
         linesToAppend.push(
-          <Component key={`${currentLine  }last${  lineNumber}`}>
+          <Component key={`${currentLine}last${lineNumber}`}>
             {currentLine}
           </Component>
         );
@@ -78,7 +76,7 @@ const Markdown = ({ source, width, height }) => {
 Markdown.propTypes = {
   source: PropTypes.string.isRequired,
   width: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired
+  height: PropTypes.number.isRequired,
 };
 
 export default Markdown;

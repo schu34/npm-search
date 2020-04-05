@@ -20,6 +20,6 @@ const Search = ({ value, onChange, getResults }) => {
 Search.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  getResults: PropTypes.func.isRequired
+  getResults: PropTypes.func.isRequired,
 };
 export default Search;

@@ -14,12 +14,12 @@ const Details = ({ selection }) => {
 
   useEffect(() => {
     getPackageDetails(selection)
-      .then(result => {
+      .then((result) => {
         setDetails(result);
         setLoading(false);
       })
-      .catch(err => {
-        setDetails(`ERROR fetching ${  selection  } ${  err}`);
+      .catch((err) => {
+        setDetails(`ERROR fetching ${selection} ${err}`);
         setLoading(false);
       });
   }, [selection]);
@@ -34,10 +34,10 @@ const Details = ({ selection }) => {
 };
 
 Details.propTypes = {
-  selection: PropTypes.string
+  selection: PropTypes.string,
 };
 
 Details.defaultProps = {
-  selection: ""
+  selection: "",
 };
 export default Details;

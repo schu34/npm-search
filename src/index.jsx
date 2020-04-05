@@ -11,7 +11,7 @@ export const App = () => {
 
   const { exit } = useApp();
 
-  useInput(input => {
+  useInput((input) => {
     if (activeScreen !== "search") {
       switch (input) {
         case "s":
@@ -41,13 +41,13 @@ export const App = () => {
     results: (
       <Results
         search={search}
-        select={arg => {
+        select={(arg) => {
           setSelection(arg);
           setScreen("details");
         }}
       />
     ),
-    details: <Details selection={selection} />
+    details: <Details selection={selection} />,
   };
 
   return <Box flexDirection={"column"}>{screens[activeScreen]}</Box>;
