@@ -4,12 +4,42 @@ import { Box, useInput, Color, Text } from "ink";
 import useDimensions from "ink-use-stdout-dimensions";
 import npmRegistryFetch from "npm-registry-fetch";
 import Loading from "./Loading";
+import PackageLine from "./PackageLine";
+import { getDetailsForSearch } from "./utils";
 
 const clamp = (number, min, max) => Math.min(max, Math.max(number, min));
 
 const npmSearch = async (search) => {
   const apiResult = await npmRegistryFetch.json(`/-/v1/search?text=${search}`);
   return apiResult.objects.map((obj) => obj.package);
+};
+
+const getDownloadCount = async (packageName) => {
+  try {
+    const res = await npmRegistryFetch(
+      `downloads/point/last-week/${packageName}`
+    );
+    return res;
+  } catch (e) {
+    return { downloads: 0 };
+  }
+};
+
+const getPackageDetails = async (packages) => {
+  packages = Array.isArray(packages) ? packages : [packages];
+  return await Promise.all(
+    packages.map(async (p) => {
+      const [details, downloadsData] = await Promise.all([
+        npmRegistryFetch(`/${p.name}/latest`),
+        getDownloadCount(p.name),
+      ]);
+      return {
+        ...p,
+        downloads: downloadsData.downloads,
+        version: details.version,
+      };
+    })
+  );
 };
 
 const Results = ({ search, select }) => {
@@ -22,17 +52,19 @@ const Results = ({ search, select }) => {
   const maxRows = Math.min(height - 2, results.length);
 
   useEffect(() => {
-    setLoading(true);
-    npmSearch(search)
-      .then((returnedResults) => {
+    (async () => {
+      setLoading(true);
+      try {
+        const returnedResults = await getDetailsForSearch(search);
+        // const enrichedResults = await getDetailsForSearch(returnedResults);
         setLoading(false);
         setResults(returnedResults);
-      })
-      .catch((e) => {
+      } catch (e) {
         setLoading(false);
         setResults([{ name: `error: ${e}` }]);
         setLoading(false);
-      });
+      }
+    })();
   }, [search]);
 
   useInput((input, key) => {
@@ -64,10 +96,12 @@ const Results = ({ search, select }) => {
         return i === selection ? (
           <Box key={res.name}>
             <Color blue>❯ </Color>
-            <Text bold>{res.name}</Text>
+            <PackageLine bold packageName={res.name} />
           </Box>
         ) : (
-          `  ${res.name}`
+          <>
+            <PackageLine packageName={`  ${res.name}`} />
+          </>
         );
       })}
       <Box>
