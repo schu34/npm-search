@@ -13,10 +13,8 @@ const Details = ({ selection }) => {
   const [width, height] = useDimensions();
 
   useEffect(() => {
-    console.log("selection", selection);
     getPackageReadme(selection)
       .then((result) => {
-        console.log("results", result);
         setDetails(result);
         setLoading(false);
       })
