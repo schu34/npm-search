@@ -2,12 +2,15 @@ import getReadme from "get-package-readme";
 import npmRegistryFetch from "npm-registry-fetch";
 import fetch from "node-fetch";
 
-export const getPackageReadme = (packageName) =>
-  new Promise((resolve, reject) => {
+export const getPackageReadme = (packageName) => {
+  console.log("packageName", packageName);
+  return new Promise((resolve, reject) => {
     getReadme(packageName, (err, readme) =>
       err ? reject(err) : resolve(readme)
     );
   });
+};
+getPackageReadme("express");
 
 export const getDetailsForSearch = async (search) => {
   try {

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Box } from "ink";
 import Loading from "./Loading";
 import useDimensions from "ink-use-stdout-dimensions";
-import { getPackageDetails } from "./utils";
+import { getPackageReadme } from "./utils";
 import Markdown from "./Markdown";
 
 const Details = ({ selection }) => {
@@ -13,13 +13,15 @@ const Details = ({ selection }) => {
   const [width, height] = useDimensions();
 
   useEffect(() => {
-    getPackageDetails(selection)
+    console.log("selection", selection);
+    getPackageReadme(selection)
       .then((result) => {
+        console.log("results", result);
         setDetails(result);
         setLoading(false);
       })
       .catch((err) => {
-        setDetails(`ERROR fetching ${selection} ${err}`);
+        setDetails(`ERROR fetching ${selection}\n ${err}`);
         setLoading(false);
       });
   }, [selection]);
