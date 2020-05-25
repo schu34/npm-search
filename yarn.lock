@@ -5095,10 +5095,10 @@ npm-package-arg@^8.0.0:
     semver "^7.0.0"
     validate-npm-package-name "^3.0.0"
 
-npm-registry-fetch@^8.0.3:
-  version "8.0.3"
-  resolved "https://registry.yarnpkg.com/npm-registry-fetch/-/npm-registry-fetch-8.0.3.tgz#be8698dd732aaea9ee8f85fbda663b20e8fcdee9"
-  integrity sha512-haEGkbIB2y7j8YUDIec2fzoTpfW6QMEdhemaOhOpiy++1gJLRsNzgiVwORryfGidDZ0X1nS+Fkg+1n4Wo3tPbA==
+npm-registry-fetch@^8.1.0:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/npm-registry-fetch/-/npm-registry-fetch-8.1.0.tgz#1d5c229b82412414b9c63cde040b51981db76904"
+  integrity sha512-RkcugRDye2j6yEiHGMyAdKQoipgp8VToSIjm+TFLhVraXOkC/WU2kjE2URcYBpcJ4hs++VFBKo6+Zg4wmrS+Qw==
   dependencies:
     "@npmcli/ci-detect" "^1.0.0"
     lru-cache "^5.1.1"
