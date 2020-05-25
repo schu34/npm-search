@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Box, useInput, Color, Text } from "ink";
+import { Box, useInput, Color } from "ink";
 import useDimensions from "ink-use-stdout-dimensions";
-import npmRegistryFetch from "npm-registry-fetch";
 import Loading from "./Loading";
+import PackageLine from "./PackageLine";
+import { getDetailsForSearch } from "./utils";
 
 const clamp = (number, min, max) => Math.min(max, Math.max(number, min));
-
-const npmSearch = async (search) => {
-  const apiResult = await npmRegistryFetch.json(`/-/v1/search?text=${search}`);
-  return apiResult.objects.map((obj) => obj.package);
-};
 
 const Results = ({ search, select }) => {
   const [top, setTop] = useState(0);
@@ -22,17 +18,19 @@ const Results = ({ search, select }) => {
   const maxRows = Math.min(height - 2, results.length);
 
   useEffect(() => {
-    setLoading(true);
-    npmSearch(search)
-      .then((returnedResults) => {
+    (async () => {
+      setLoading(true);
+      try {
+        const returnedResults = await getDetailsForSearch(search);
+        // const enrichedResults = await getDetailsForSearch(returnedResults);
         setLoading(false);
         setResults(returnedResults);
-      })
-      .catch((e) => {
+      } catch (e) {
         setLoading(false);
         setResults([{ name: `error: ${e}` }]);
         setLoading(false);
-      });
+      }
+    })();
   }, [search]);
 
   useInput((input, key) => {
@@ -64,10 +62,12 @@ const Results = ({ search, select }) => {
         return i === selection ? (
           <Box key={res.name}>
             <Color blue>❯ </Color>
-            <Text bold>{res.name}</Text>
+            <PackageLine bold packageName={res.name} />
           </Box>
         ) : (
-          `  ${res.name}`
+          <>
+            <PackageLine packageName={`  ${res.name}`} />
+          </>
         );
       })}
       <Box>
