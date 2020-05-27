@@ -3,7 +3,6 @@ import npmRegistryFetch from "npm-registry-fetch";
 import fetch from "node-fetch";
 
 export const getPackageReadme = (packageName) => {
-  // console.log("packageName", packageName);
   return new Promise((resolve, reject) => {
     getReadme(packageName, (err, readme) =>
       err ? reject(err) : resolve(readme)
@@ -17,7 +16,7 @@ export const getDetailsForSearch = async (search) => {
     const details = await getPackageDetails(packages);
     return details;
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
 
@@ -57,7 +56,7 @@ const getDeets = async (p) => {
       return deets.json();
     })();
   } catch (e) {
-    console.log("in getDeets", p, e);
+    console.error("in getDeets", p, e);
     return {};
   }
 };
@@ -79,6 +78,6 @@ const getPackageDetails = async (packages) => {
       })
     );
   } catch (e) {
-    console.log("in getPackageDetails", e);
+    console.error("in getPackageDetails", e);
   }
 };
