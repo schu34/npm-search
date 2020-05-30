@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Box } from "ink";
 import Loading from "./Loading";
 import useDimensions from "ink-use-stdout-dimensions";
-import { getPackageReadme } from "./utils";
+import getPackageReadme from "./getPackageReadme";
 import Markdown from "./Markdown";
 
 const Details = ({ selection }) => {
