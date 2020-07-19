@@ -57,7 +57,7 @@
   "dependencies": {
     "github-url-to-object": "^4.0.4",
     "ink": "^2.6.0",
-    "ink-text-input": "^3.2.2",
+    "ink-text-input": "^3.3.0",
     "ink-use-stdout-dimensions": "^1.0.5",
     "node-fetch": "^2.6.0",
     "npm-registry-fetch": "^8.1.1",
