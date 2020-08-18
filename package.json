@@ -60,7 +60,7 @@
     "ink-text-input": "^3.3.0",
     "ink-use-stdout-dimensions": "^1.0.5",
     "node-fetch": "^2.6.0",
-    "npm-registry-fetch": "^8.1.2",
+    "npm-registry-fetch": "^8.1.4",
     "react": "^16.13.1"
   }
 }
