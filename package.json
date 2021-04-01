@@ -61,6 +61,6 @@
     "ink-use-stdout-dimensions": "^1.0.5",
     "node-fetch": "^2.6.1",
     "npm-registry-fetch": "^9.0.0",
-    "react": "^16.13.1"
+    "react": "^16.14.0"
   }
 }
